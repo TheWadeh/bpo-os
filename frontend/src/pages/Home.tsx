@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import DashboardPreview from '../components/DashboardPreview'
 
 export default function Home() {
   return (
@@ -40,34 +41,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Mocked dashboard preview */}
+          {/* Dashboard preview */}
           <div className="mt-12">
-            <div className="relative mx-auto max-w-5xl card-base p-4 shadow-2xl shadow-neon-green/10">
-              <div className="absolute -inset-10 -z-10 rounded-[28px] bg-gradient-to-b from-neon-green/15 to-soft-cyan/10 blur-3xl" />
-              <div className="rounded-xl bg-navy-blue p-4 ring-1 ring-white/10">
-                {/* top bar */}
-                <div className="mb-4 flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-full bg-red-400/70" />
-                  <span className="h-3 w-3 rounded-full bg-yellow-400/70" />
-                  <span className="h-3 w-3 rounded-full bg-green-400/70" />
-                  <div className="ml-auto h-6 w-40 rounded bg-white/5" />
-                </div>
-                {/* skeleton rows */}
-                <div className="grid gap-4 md:grid-cols-3">
-                  <div className="col-span-2 space-y-3">
-                    <div className="h-10 rounded-md bg-white/5" />
-                    <div className="h-24 rounded-md bg-white/5" />
-                    <div className="h-24 rounded-md bg-white/5" />
-                    <div className="h-24 rounded-md bg-white/5" />
-                  </div>
-                  <div className="space-y-3">
-                    <div className="h-10 rounded-md bg-white/5" />
-                    <div className="h-24 rounded-md bg-white/5" />
-                    <div className="h-24 rounded-md bg-white/5" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <DashboardPreview />
           </div>
         </div>
       </section>
