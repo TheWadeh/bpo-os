@@ -12,20 +12,20 @@ export default function Home() {
           <div className="absolute right-[10%] top-[55%] h-[280px] w-[480px] rounded-full opacity-40 blur-2xl" style={{ background: 'radial-gradient(closest-side, rgba(162,255,69,0.25), transparent 70%)' }} />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-28 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 pb-24 pt-32 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center rounded-full bg-navy-blue-light px-3 py-1 text-xs font-medium text-neon-green ring-1 ring-inset ring-soft-cyan/40">
+            <span className="pill text-neon-green">
               NEW
               <span className="ml-2 text-text-light-gray">BPO OS AI is now available</span>
             </span>
-            <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-text-white sm:text-5xl md:text-6xl">
+                         <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-text-white sm:text-5xl md:text-[56px]">
               All‑in‑one platform to simplify your business workflow
             </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-pretty text-lg text-text-light-gray">
+                         <p className="mx-auto mt-4 max-w-2xl text-pretty text-base sm:text-lg text-text-light-gray">
               Harness AI for seamless project management, job operations, and team collaboration — tailored for growing BPOs.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+                                     <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
               <Link
                 to="/register"
                 className="btn-primary"
@@ -34,7 +34,7 @@ export default function Home() {
               </Link>
               <Link
                 to="/about"
-                className="btn-secondary"
+                className="btn-ghost"
               >
                 Schedule a Demo
               </Link>
@@ -49,7 +49,7 @@ export default function Home() {
       </section>
 
       {/* Logos row */}
-      <section className="bg-navy-blue py-10 text-text-light-gray">
+      <section className="bg-navy-blue py-12 text-text-light-gray">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 opacity-70">
             {Array.from({ length: 7 }).map((_, idx) => (
@@ -59,8 +59,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features */}
-      <section className="bg-navy-blue pb-24 pt-6 text-text-light-gray">
+             {/* Features */}
+       <section className="bg-navy-blue pb-28 pt-8 text-text-light-gray">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center rounded-full bg-navy-blue-light px-3 py-1 text-xs font-medium text-text-light-gray ring-1 ring-inset ring-white/10">
