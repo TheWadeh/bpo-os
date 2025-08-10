@@ -4,3 +4,11 @@
 html, body, #root {
   height: 100%;
 }
+
+/* Utilities for dark hero sections on the landing page */
+.gradient-text {
+  background: linear-gradient(180deg, #fff, #cbd5e1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

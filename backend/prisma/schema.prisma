@@ -10,3 +10,84 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String   @unique
+  passwordHash String
+  role        String
+  jobs        Job[]
+  tasks       Task[]
+}
+
+model Client {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String
+  phone       String?
+  company     String?
+  country     String?
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  leads       Lead[]
+  projects    Project[]
+}
+
+model Lead {
+  id          Int      @id @default(autoincrement())
+  clientId    Int
+  stage       String   // e.g. "Prospect", "Qualified", "Negotiation", "Closed"
+  value       Float?
+  source      String?  // e.g. "LinkedIn", "Referral"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  client      Client   @relation(fields: [clientId], references: [id])
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  deadline    DateTime?
+  clientId    Int
+  status      String   // e.g., "Active", "Completed", "On Hold"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  client      Client   @relation(fields: [clientId], references: [id])
+  tasks       Task[]
+}
+
+model Task {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  status      String   // e.g., "To Do", "In Progress", "Done"
+  projectId   Int
+  assignedTo  Int?     // user id
+  priority    String?  // e.g., "Low", "Medium", "High"
+  dueDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  project     Project  @relation(fields: [projectId], references: [id])
+  assignee    User?    @relation(fields: [assignedTo], references: [id])
+}
+
+model Job {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  requirements String?
+  location    String?
+  jobType     String   // e.g., Full-time, Part-time, Contract
+  salaryRange String?
+  companyName String
+  postedById  Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  postedBy    User     @relation(fields: [postedById], references: [id])
+}

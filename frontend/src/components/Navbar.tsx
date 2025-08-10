@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 
@@ -6,6 +6,9 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const { isAuthenticated, user, logout } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
+
+  const onHomeRoute = location.pathname === '/'
 
   const handleLogout = () => {
     logout()
@@ -16,11 +19,11 @@ export default function Navbar() {
     `px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'text-blue-600' : 'text-gray-700 hover:text-gray-900'}`
 
   return (
-    <nav className="bg-white border-b border-gray-200">
+    <nav className={onHomeRoute ? 'bg-transparent absolute inset-x-0 top-0 z-20' : 'bg-white border-b border-gray-200'}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link to="/" className="text-lg font-semibold text-gray-900">
+            <Link to="/" className={onHomeRoute ? 'text-lg font-semibold text-white' : 'text-lg font-semibold text-gray-900'}>
               BPO OS
             </Link>
             <div className="hidden md:block ml-6">
@@ -44,8 +47,8 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-3">
             {isAuthenticated ? (
               <>
-                <span className="text-sm text-gray-700">{user?.name}</span>
-                <button onClick={handleLogout} className="inline-flex items-center rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-gray-800">
+                <span className={onHomeRoute ? 'text-sm text-white/80' : 'text-sm text-gray-700'}>{user?.name}</span>
+                <button onClick={handleLogout} className={onHomeRoute ? 'inline-flex items-center rounded-md bg-white/10 px-3 py-2 text-sm font-medium text-white ring-1 ring-inset ring-white/15 hover:bg-white/20' : 'inline-flex items-center rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-gray-800'}>
                   Logout
                 </button>
               </>
@@ -54,7 +57,7 @@ export default function Navbar() {
                 <NavLink to="/login" className={navLinkClass}>
                   Login
                 </NavLink>
-                <NavLink to="/register" className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700">
+                <NavLink to="/register" className={onHomeRoute ? 'inline-flex items-center rounded-md bg-emerald-500 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-400' : 'inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700'}>
                   Register
                 </NavLink>
               </>
@@ -116,6 +119,7 @@ export default function Navbar() {
     </nav>
   )
 }
+
 
 
 
