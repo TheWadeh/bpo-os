@@ -1,0 +1,364 @@
+Module 1 — Installing Everything Important (Full Setup + Auth Module)
+Prompt 1: Setup Backend and Database
+plaintext
+Copy
+Edit
+Create a Node.js backend using Express and Prisma ORM with SQLite database for the BPO OS project.
+
+Features to implement:
+- Initialize the project with package.json and all necessary dependencies:
+  express, prisma, @prisma/client, sqlite3, bcrypt, jsonwebtoken, cors, dotenv
+- Setup Prisma with a SQLite database
+- Create User model in Prisma schema with fields:
+  id (Int, primary key, auto-increment),
+  name (String),
+  email (String, unique),
+  passwordHash (String),
+  role (String) — can be 'admin' or 'user'
+- Setup database migrations and generate Prisma client
+- Setup environment variables (.env) for JWT secret and database connection
+- Setup basic Express server with CORS and JSON middleware
+Prompt 2: Implement Authentication System
+plaintext
+Copy
+Edit
+In the backend, implement user authentication with the following:
+
+- Routes:
+  POST /auth/register — to register a new user (hash password with bcrypt)
+  POST /auth/login — to login user and return JWT token
+  GET /auth/me — to get current logged-in user info (protected route)
+- Middleware to protect routes by validating JWT token
+- Password hashing using bcrypt
+- JWT token generation and verification using a secret key from environment variables
+- Use MVC structure with separate controllers and routes
+Prompt 3: Setup Frontend with React + Tailwind
+plaintext
+Copy
+Edit
+Create a React frontend using Vite, TailwindCSS, React Router, and Axios for API calls.
+
+Implement:
+- Basic app layout with navbar including links: Home, Jobs, BPO School, About, Login/Register
+- Pages for Login and Register forms with validation
+- Auth context to manage logged-in user state and JWT token stored in localStorage
+- Protected routes for authenticated areas (CRM, Project Management, Job Posting)
+- Setup API service using Axios to interact with backend authentication endpoints
+- Responsive design using TailwindCSS
+Prompt 4: Integrate Frontend and Backend Authentication
+plaintext
+Copy
+Edit
+Connect the React frontend authentication forms to the backend API.
+
+- On registration, call /auth/register and handle success or error messages
+- On login, call /auth/login, store JWT token securely in localStorage, and update auth context
+- Implement logout functionality clearing JWT and user data
+- Protect routes such that unauthenticated users are redirected to login page
+- Display logged-in user’s name in the navbar when authenticated
+Deliverables After Module 1
+Working backend with authentication and SQLite DB
+
+React frontend with login/register and protected routing
+
+JWT secured API communication
+
+Ready base for next modules
+
+
+
+Module 2 — Landing Page + BPO School (Documentation Dashboard)
+Prompt 1: Create Public Landing Page with Navbar and Footer
+plaintext
+Copy
+Edit
+In the React frontend, create a public landing page for BPO OS with the following:
+
+- Navbar with links: Home, Jobs, BPO School, About, Login/Register
+- Footer with basic info and social links
+- Home page hero section with title, subtitle, and call-to-action buttons (Join as Entrepreneur, Browse Jobs, Learn in BPO School)
+- Features section highlighting key benefits of BPO OS
+- Responsive design using TailwindCSS
+- Implement React Router for navigation between pages
+Prompt 2: Implement Public Jobs Listing Page
+plaintext
+Copy
+Edit
+Create a public Jobs page in React frontend that:
+
+- Fetches job listings from backend API endpoint GET /jobs
+- Displays jobs in card format showing title, company name, location, job type, and salary range snippet
+- Implements pagination or infinite scroll if more than 10 jobs
+- Clicking a job opens a modal or navigates to a detail page with full job description and apply instructions
+- Responsive UI styled with TailwindCSS
+Prompt 3: Build BPO School Documentation Dashboard
+plaintext
+Copy
+Edit
+Create a BPO School documentation dashboard in React frontend with:
+
+- Sidebar navigation listing categories such as: Getting Started, Setting Up a BPO, Marketing, Client Management, Scaling Up, Legal Requirements
+- Main content area that renders documentation content in markdown format
+- Search bar to filter documentation topics by title
+- Static documentation content stored in a local JSON file or markdown files
+- Responsive layout where sidebar collapses on smaller screens
+- TailwindCSS styling for clean, modern look similar to popular framework docs (e.g., Next.js docs)
+Prompt 4: Setup Routes for Landing, Jobs, School, About, Login/Register
+plaintext
+Copy
+Edit
+Setup React Router in the frontend to support navigation for:
+
+- '/' → Landing Home page
+- '/jobs' → Jobs listing page
+- '/jobs/:id' → Job detail page
+- '/bposchool' → BPO School documentation dashboard
+- '/about' → About page with mission, vision, and information about Ethiopian BPO sector
+- '/login' and '/register' → Authentication pages
+
+Ensure navigation is smooth and URL changes reflect the current page.
+Prompt 5: Implement Responsive Navbar with Auth Status
+plaintext
+Copy
+Edit
+Update Navbar component to:
+
+- Show Login/Register links if user is not authenticated
+- Show user’s name and a Logout button if authenticated
+- Responsive design: hamburger menu on mobile that toggles nav links
+- Use React context or state to determine authentication status
+Deliverables After Module 2
+Fully responsive public landing page with navbar & footer
+
+Jobs listing and job detail pages (public)
+
+BPO School docs dashboard with sidebar + search + markdown content
+
+React Router fully integrated for all pages
+
+Auth-aware navbar
+
+
+Module 3 — CRM + AI Insights + Lead Management
+Prompt 1: Create CRM Backend Models and API
+plaintext
+Copy
+Edit
+In the backend, add CRM functionality with Prisma models for Client and Lead:
+
+model Client {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String
+  phone       String?
+  company     String?
+  country     String?
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  leads       Lead[]
+}
+
+model Lead {
+  id          Int      @id @default(autoincrement())
+  clientId    Int
+  stage       String   // e.g. "Prospect", "Qualified", "Negotiation", "Closed"
+  value       Float?
+  source      String?  // e.g. "LinkedIn", "Referral"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  client      Client   @relation(fields: [clientId], references: [id])
+}
+
+Create REST API endpoints (protected with JWT middleware) for:
+
+- CRUD operations on Clients (/clients)
+- CRUD operations on Leads (/leads)
+Prompt 2: Integrate Gemini API for AI Insights
+plaintext
+Copy
+Edit
+Add a new POST endpoint /ai/insights in the backend that:
+
+- Accepts client and lead data in the request body (e.g., clientName, leadStage, value)
+- Sends the data as a prompt to the Google Gemini API
+- Parses the response to extract lead closing probability, suggestions, and risk factors
+- Returns these insights as JSON to the frontend
+Prompt 3: Python Automation Script for Lead Enrichment
+plaintext
+Copy
+Edit
+Create a Python script that:
+
+- Accepts a company name or email as input
+- Uses public APIs or mock data to enrich lead information such as country, industry, LinkedIn profile URL
+- Can be invoked by the backend when a new lead is created to fill missing details
+- Returns the enriched data in JSON format
+Prompt 4: Frontend CRM Dashboard with Lead Management
+plaintext
+Copy
+Edit
+In the React frontend, create a CRM dashboard with:
+
+- A searchable and sortable table listing clients
+- A lead pipeline view using react-beautiful-dnd with columns like Prospect, Qualified, Negotiation, Closed
+- Ability to drag and drop leads between columns to update their stage via API
+- “AI Insights” button on each lead that calls /ai/insights and displays the returned insights in a modal
+- Forms to add and edit clients and leads
+- Use TailwindCSS for styling and responsive design
+Deliverables After Module 3
+Backend: CRM models and protected API routes
+
+AI-powered insights endpoint using Gemini API
+
+Python automation script for enriching leads
+
+Frontend CRM with lead pipeline, client list, and AI insights modal
+
+
+
+Module 4 — Project Management + Kanban Board
+Prompt 1: Backend Models and APIs
+plaintext
+Copy
+Edit
+In the backend, add Project and Task models using Prisma ORM:
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  deadline    DateTime?
+  clientId    Int
+  status      String   // e.g., "Active", "Completed", "On Hold"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  client      Client   @relation(fields: [clientId], references: [id])
+  tasks       Task[]
+}
+
+model Task {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  status      String   // e.g., "To Do", "In Progress", "Done"
+  projectId   Int
+  assignedTo  Int?     // user id
+  priority    String?  // e.g., "Low", "Medium", "High"
+  dueDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  project     Project  @relation(fields: [projectId], references: [id])
+  assignee    User?    @relation(fields: [assignedTo], references: [id])
+}
+
+Create REST API endpoints (JWT protected) for:
+
+- CRUD on Projects (/projects)
+- CRUD on Tasks (/tasks)
+Prompt 2: Frontend Kanban Board
+plaintext
+Copy
+Edit
+In the React frontend, create a Kanban board component to manage tasks with:
+
+- Columns for task statuses: To Do, In Progress, Done
+- Drag-and-drop support using react-beautiful-dnd to move tasks between columns
+- On drag end, update the task’s status by calling backend API
+- Show task details like title, assignee, priority, and due date
+- Project selector dropdown to switch between projects
+- TailwindCSS for responsive and clean UI
+Prompt 3: Additional Features and UX
+plaintext
+Copy
+Edit
+Add the following to the frontend:
+
+- “Add Task” button in each column to create new tasks
+- Task detail modal on task click to view/edit task information
+- Loading indicators during API calls
+- Confirmation dialogs before deleting projects or tasks
+- Responsive design for mobile and desktop
+Deliverables After Module 4
+Backend Project and Task models with APIs
+
+React Kanban board with drag-and-drop task management
+
+Smooth UX with modals, loaders, and confirmations
+
+Full integration with authentication and backend
+
+
+Module 5 — BPO Jobs Portal
+Prompt 1: Backend Job Model and CRUD API
+plaintext
+Copy
+Edit
+In the backend, add a Job model in Prisma schema with the following fields:
+
+model Job {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  requirements String?
+  location    String?
+  jobType     String   // e.g., Full-time, Part-time, Contract
+  salaryRange String?
+  companyName String
+  postedById  Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  postedBy    User     @relation(fields: [postedById], references: [id])
+}
+
+Create REST API endpoints (JWT protected where necessary):
+
+- POST /jobs — Create new job posting (protected)
+- GET /jobs — List all jobs (public), support filters like jobType and location
+- GET /jobs/:id — Get job details (public)
+- PUT /jobs/:id — Update job posting (protected, only poster)
+- DELETE /jobs/:id — Delete job posting (protected, only poster)
+Prompt 2: Frontend Public Jobs Listing Page
+plaintext
+Copy
+Edit
+In the React frontend, create a public Jobs page that:
+
+- Fetches job listings from backend GET /jobs
+- Displays jobs in cards with title, company, location, jobType, and salary range snippet
+- Supports search and filters (job type, location)
+- Implements pagination or infinite scroll if many jobs
+- Clicking on a job shows a detail modal or page with full description and apply instructions
+- Responsive and styled with TailwindCSS
+Prompt 3: Frontend Job Posting Portal (Protected)
+plaintext
+Copy
+Edit
+In the React frontend, create a protected Job Posting portal where authenticated users can:
+
+- Add new job postings via a form with validation
+- View a list of jobs they have posted
+- Edit or delete their posted jobs
+- Receive success and error feedback messages
+- Responsive UI styled with TailwindCSS
+Prompt 4: Optional Enhancements
+plaintext
+Copy
+Edit
+Add optional features such as:
+
+- Email notifications to admins or job posters when a new job is posted
+- Apply button linking to external application URLs or email addresses
+- Ability for users to save favorite jobs (requires authentication)
+- Admin moderation queue for job approvals (if time allows)
+Deliverables After Module 5
+Backend jobs CRUD API with secure authentication
+
+Public jobs listing and detail view pages
+
+Protected job posting portal with form and job management
+
+Responsive UI with search, filters, and pagination
