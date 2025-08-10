@@ -16,6 +16,18 @@ app.get('/', (req, res) => {
   res.send('BPO OS Backend is running!');
 });
 
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'Hello from the backend!' });
+});
+
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/jobs', require('./routes/jobs'));
+app.use('/api/clients', require('./routes/clients'));
+app.use('/api/leads', require('./routes/leads'));
+app.use('/api/ai', require('./routes/ai'));
+app.use('/api/projects', require('./routes/projects'));
+app.use('/api/tasks', require('./routes/tasks'));
+
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {

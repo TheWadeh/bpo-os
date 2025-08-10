@@ -16,14 +16,14 @@ export default function Navbar() {
   }
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'text-blue-600' : 'text-gray-700 hover:text-gray-900'}`
+    `px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'text-neon-green' : 'text-text-light-gray hover:text-text-white'}`
 
   return (
-    <nav className={onHomeRoute ? 'bg-transparent absolute inset-x-0 top-0 z-20' : 'bg-white border-b border-gray-200'}>
+    <nav className="bg-navy-blue absolute inset-x-0 top-0 z-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link to="/" className={onHomeRoute ? 'text-lg font-semibold text-white' : 'text-lg font-semibold text-gray-900'}>
+            <Link to="/" className="text-lg font-semibold text-text-white">
               BPO OS
             </Link>
             <div className="hidden md:block ml-6">
@@ -40,6 +40,11 @@ export default function Navbar() {
                 <NavLink to="/about" className={navLinkClass}>
                   About
                 </NavLink>
+                {isAuthenticated && (
+                  <NavLink to="/dashboard" className={navLinkClass}>
+                    Dashboard
+                  </NavLink>
+                )}
               </div>
             </div>
           </div>
@@ -47,8 +52,8 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-3">
             {isAuthenticated ? (
               <>
-                <span className={onHomeRoute ? 'text-sm text-white/80' : 'text-sm text-gray-700'}>{user?.name}</span>
-                <button onClick={handleLogout} className={onHomeRoute ? 'inline-flex items-center rounded-md bg-white/10 px-3 py-2 text-sm font-medium text-white ring-1 ring-inset ring-white/15 hover:bg-white/20' : 'inline-flex items-center rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-gray-800'}>
+                <span className="text-sm text-text-light-gray">{user?.name}</span>
+                <button onClick={handleLogout} className="btn-secondary">
                   Logout
                 </button>
               </>
@@ -57,7 +62,7 @@ export default function Navbar() {
                 <NavLink to="/login" className={navLinkClass}>
                   Login
                 </NavLink>
-                <NavLink to="/register" className={onHomeRoute ? 'inline-flex items-center rounded-md bg-emerald-500 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-400' : 'inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700'}>
+                <NavLink to="/register" className="btn-primary">
                   Register
                 </NavLink>
               </>
@@ -67,7 +72,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 focus:outline-none"
+              className="inline-flex items-center justify-center rounded-md p-2 text-text-white hover:bg-navy-blue-light focus:outline-none"
               onClick={() => setOpen(!open)}
             >
               <span className="sr-only">Open main menu</span>
@@ -82,7 +87,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-gray-200">
+        <div className="md:hidden border-t border-navy-blue-light bg-navy-blue">
           <div className="space-y-1 px-2 py-3">
             <NavLink to="/" className={navLinkClass} end onClick={() => setOpen(false)}>
               Home
@@ -96,10 +101,15 @@ export default function Navbar() {
             <NavLink to="/about" className={navLinkClass} onClick={() => setOpen(false)}>
               About
             </NavLink>
+                {isAuthenticated && (
+                  <NavLink to="/dashboard" className={navLinkClass} onClick={() => setOpen(false)}>
+                    Dashboard
+                  </NavLink>
+                )}
             {isAuthenticated ? (
               <button
                 onClick={() => { setOpen(false); handleLogout() }}
-                className="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100"
+                className="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-text-white hover:bg-navy-blue-light"
               >
                 Logout
               </button>

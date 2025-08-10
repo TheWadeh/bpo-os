@@ -1,0 +1,13 @@
+/* Reusable Button Styles */
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-semibold text-text-white bg-neon-green shadow-subtle-glow-green hover:bg-neon-green/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neon-green;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-semibold text-text-white bg-soft-cyan shadow-subtle-glow-cyan hover:bg-soft-cyan/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-soft-cyan;
+}
+
+/* Reusable Card Styles */
+.card-base {
+  @apply rounded-2xl border border-white/10 bg-navy-blue-light p-6 shadow-lg;
+}

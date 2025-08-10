@@ -1,30 +1,41 @@
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import api from '../lib/api'
 
 export default function JobsList() {
-  // Placeholder list; will be connected to backend GET /jobs
-  const jobs = [
-    { id: 1, title: 'Customer Support Agent', company: 'Acme Co.', location: 'Addis Ababa', jobType: 'Full-time' },
-    { id: 2, title: 'Data Entry Specialist', company: 'Blue Nile Ltd.', location: 'Remote', jobType: 'Contract' },
-  ]
+  const [jobs, setJobs] = useState([])
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await api.get('/api/jobs')
+        setJobs(response.data)
+      } catch (error) {
+        console.error('Error fetching jobs:', error)
+      }
+    }
+    fetchJobs()
+  }, [])
 
   return (
-    <section>
+    <section className="text-text-white">
       <h2 className="text-2xl font-semibold mb-4">Jobs</h2>
       <div className="grid gap-4 sm:grid-cols-2">
         {jobs.map((job) => (
-          <Link key={job.id} to={`/jobs/${job.id}`} className="block rounded-lg border border-gray-200 p-4 hover:shadow">
+          <Link key={job.id} to={`/jobs/${job.id}`} className="card-base block">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-medium">{job.title}</h3>
-              <span className="text-xs text-gray-600">{job.jobType}</span>
+              <h3 className="text-lg font-medium text-text-white">{job.title}</h3>
+              <span className="text-xs text-text-light-gray">{job.jobType}</span>
             </div>
-            <p className="text-sm text-gray-600">{job.company}</p>
-            <p className="text-sm text-gray-500">{job.location}</p>
+            <p className="text-sm text-text-light-gray">{job.companyName}</p>
+            <p className="text-sm text-text-light-gray">{job.location}</p>
           </Link>
         ))}
       </div>
     </section>
   )
 }
+
 
 
 
