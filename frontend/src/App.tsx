@@ -12,7 +12,7 @@ import CrmDashboard from './pages/dashboard/CrmDashboard'
 import ProjectsDashboard from './pages/dashboard/ProjectsDashboard'
 import AiInsightsDashboard from './pages/dashboard/AiInsightsDashboard'
 import JobPostingPortal from './pages/dashboard/JobPostingPortal'
-import Dashboard from './pages/dashboard/Dashboard'
+import DashboardOverview from './pages/dashboard/DashboardOverview'
 import Footer from './components/Footer'
 
 function App() {
@@ -21,61 +21,13 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/jobs"
-          element={(
-            <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-              <JobsList />
-            </main>
-          )}
-        />
-        <Route
-          path="/jobs/:id"
-          element={(
-            <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-              <JobDetail />
-            </main>
-          )}
-        />
-        <Route
-          path="/bposchool"
-          element={(
-            <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-              <BpoSchool />
-            </main>
-          )}
-        />
-        <Route
-          path="/about"
-          element={(
-            <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-              <About />
-            </main>
-          )}
-        />
-        <Route
-          path="/login"
-          element={(
-            <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-              <Login />
-            </main>
-          )}
-        />
-        <Route
-          path="/register"
-          element={(
-            <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-              <Register />
-            </main>
-          )}
-        />
-        <Route path="/dashboard" element={(
-          <ProtectedRoute>
-            <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-              <Dashboard />
-            </main>
-          </ProtectedRoute>
-        )} />
+        <Route path="/jobs" element={<JobsList />} />
+        <Route path="/jobs/:id" element={<JobDetail />} />
+        <Route path="/bposchool" element={<BpoSchool />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<ProtectedRoute><DashboardOverview /></ProtectedRoute>} />
         <Route path="/dashboard/crm" element={<ProtectedRoute><CrmDashboard /></ProtectedRoute>} />
         <Route path="/dashboard/projects" element={<ProtectedRoute><ProjectsDashboard /></ProtectedRoute>} />
         <Route path="/dashboard/ai-insights" element={<ProtectedRoute><AiInsightsDashboard /></ProtectedRoute>} />
