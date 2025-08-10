@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import DashboardPreview from '../components/DashboardPreview'
 
 export default function Home() {
   return (
@@ -11,20 +12,20 @@ export default function Home() {
           <div className="absolute right-[10%] top-[55%] h-[280px] w-[480px] rounded-full opacity-40 blur-2xl" style={{ background: 'radial-gradient(closest-side, rgba(162,255,69,0.25), transparent 70%)' }} />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-28 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 pb-24 pt-32 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center rounded-full bg-navy-blue-light px-3 py-1 text-xs font-medium text-neon-green ring-1 ring-inset ring-soft-cyan/40">
+            <span className="pill text-neon-green">
               NEW
               <span className="ml-2 text-text-light-gray">BPO OS AI is now available</span>
             </span>
-            <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-text-white sm:text-5xl md:text-6xl">
+                         <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-text-white sm:text-5xl md:text-[56px]">
               All‑in‑one platform to simplify your business workflow
             </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-pretty text-lg text-text-light-gray">
+                         <p className="mx-auto mt-4 max-w-2xl text-pretty text-base sm:text-lg text-text-light-gray">
               Harness AI for seamless project management, job operations, and team collaboration — tailored for growing BPOs.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+                                     <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
               <Link
                 to="/register"
                 className="btn-primary"
@@ -33,47 +34,22 @@ export default function Home() {
               </Link>
               <Link
                 to="/about"
-                className="btn-secondary"
+                className="btn-ghost"
               >
                 Schedule a Demo
               </Link>
             </div>
           </div>
 
-          {/* Mocked dashboard preview */}
+          {/* Dashboard preview */}
           <div className="mt-12">
-            <div className="relative mx-auto max-w-5xl card-base p-4 shadow-2xl shadow-neon-green/10">
-              <div className="absolute -inset-10 -z-10 rounded-[28px] bg-gradient-to-b from-neon-green/15 to-soft-cyan/10 blur-3xl" />
-              <div className="rounded-xl bg-navy-blue p-4 ring-1 ring-white/10">
-                {/* top bar */}
-                <div className="mb-4 flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-full bg-red-400/70" />
-                  <span className="h-3 w-3 rounded-full bg-yellow-400/70" />
-                  <span className="h-3 w-3 rounded-full bg-green-400/70" />
-                  <div className="ml-auto h-6 w-40 rounded bg-white/5" />
-                </div>
-                {/* skeleton rows */}
-                <div className="grid gap-4 md:grid-cols-3">
-                  <div className="col-span-2 space-y-3">
-                    <div className="h-10 rounded-md bg-white/5" />
-                    <div className="h-24 rounded-md bg-white/5" />
-                    <div className="h-24 rounded-md bg-white/5" />
-                    <div className="h-24 rounded-md bg-white/5" />
-                  </div>
-                  <div className="space-y-3">
-                    <div className="h-10 rounded-md bg-white/5" />
-                    <div className="h-24 rounded-md bg-white/5" />
-                    <div className="h-24 rounded-md bg-white/5" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <DashboardPreview />
           </div>
         </div>
       </section>
 
       {/* Logos row */}
-      <section className="bg-navy-blue py-10 text-text-light-gray">
+      <section className="bg-navy-blue py-12 text-text-light-gray">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 opacity-70">
             {Array.from({ length: 7 }).map((_, idx) => (
@@ -83,8 +59,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features */}
-      <section className="bg-navy-blue pb-24 pt-6 text-text-light-gray">
+             {/* Features */}
+       <section className="bg-navy-blue pb-28 pt-8 text-text-light-gray">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center rounded-full bg-navy-blue-light px-3 py-1 text-xs font-medium text-text-light-gray ring-1 ring-inset ring-white/10">
